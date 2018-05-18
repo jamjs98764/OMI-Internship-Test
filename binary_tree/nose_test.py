@@ -48,7 +48,12 @@ def testInsertionSearch3():
 		myTree.insertNode(item)
 	assert checkTreeFixed(myTree,target) == (0,[]) 
 
+######
+# Part 2: Test BST balance
+#####
 
+
+# Normal case:
 def testBalancedTrue():
 	myTree = binaryTree(11)
 	testList = [13,2,1,3,12,14]
@@ -61,6 +66,31 @@ def testBalancedTrue():
 	assert checkBalance(myTree) == True
 	assert treeHeight(myTree) == 3
 
+# Bounary case: tree with single node always balanced
+def testBalancedTrue1():
+	myTree = binaryTree(11)
+	testList = []
+	# Solution:
+	#		11
+	for item in testList:
+		myTree.insertNode(item)
+	assert checkBalance(myTree) == True
+	assert treeHeight(myTree) == 1
+
+# Boundary case: Diff min max height = 1
+def testBalancedTrue2():
+	myTree = binaryTree(11)
+	testList = [13,2,1,3]
+	# Solution:
+	#		11
+	#	2		13
+	# 1   3  
+	for item in testList:
+		myTree.insertNode(item)
+	assert checkBalance(myTree) == True
+	assert treeHeight(myTree) == 3
+
+# Boundary case: Diff min max height = 2
 def testBalancedFalse():
 	myTree = binaryTree(11)
 	testList = [13,2,1,3,4]
@@ -73,5 +103,11 @@ def testBalancedFalse():
 		myTree.insertNode(item)
 	assert checkBalance(myTree) == False
 
+######
+# Part 3: Creating balanced tree from 
+#####
+
+
+
 def testBalancedCreate():
-	pass
+	

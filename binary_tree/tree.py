@@ -1,8 +1,10 @@
 
 from collections import deque
 from random import randint
+import math
 
 class binaryTree():
+	# Simple implementation of binary search tree, with insertion and search
 	def __init__(self,value):
 		self.left = None
 		self.right = None
@@ -29,6 +31,8 @@ class binaryTree():
 	def insertNode(self,newValue):
 		# Element-wise insertion for stream of values
 		# If newValue == current node's value, add as left child of current node
+		# NB! May result in non-BST if stream of values are in specific order.
+		# NB! Solution to above error: (i) use createdBalancedTree(array) or (ii) implement trees with on-the-fly rotation like splay trees etc.
 		if self.value < newValue:
 			if self.right == None: # If right node is empty, create new node
 				self.right = binaryTree(newValue)
@@ -59,6 +63,7 @@ class binaryTree():
 	# "Depth" and "path" are records of recursion, passed here as args to avoid using global variables
 	# If target is in tree, returns depth and [tree path]
 	# If target is not in tree, returns 0 as depth and empty list as tree path
+	# If target is at root directly, returns 1 as depth and empty list
 		if path == None:
 			path = []
 		if self.value == target:
@@ -128,7 +133,7 @@ def _createBalancedTree(array):
 	if array == []: # If no more values in array, stop
 		return None
 	else:
-		midpoint = round((len(array))/2)
+		midpoint = math.trunc((len(array))/2)
 		root = binaryTree(array[midpoint])
 		root.left = _createBalancedTree(array[0:midpoint])
 		root.right = _createBalancedTree(array[midpoint+1:])
@@ -141,20 +146,10 @@ def createBalancedTree(array):
 
 
 
-myTree = binaryTree(11)
-testList = [13,2,1,3,12,4]
-# Solution:
-#		11
-#	2		13
-# 1   3   12  
-#      4
-for item in testList:
-	myTree.insertNode(item)
-print(checkBalance(myTree))
-print(treeHeight(myTree))
-print(treeMinHeight(myTree))
-
-
-testList = [3,2,1,4,5]
+testList = [3,2,1,4,6,5,1,1,1,1]
 testTree = createBalancedTree(testList)
-print(testTree.searchTree(6))
+#print(testTree.getValue())
+#print(testTree.getLeftChild().getValue())
+#print(testTree.getRightChild().getValue())
+testTree.printDepthWise()
+print(checkBalance(testTree))
