@@ -107,7 +107,13 @@ def testBalancedFalse():
 # Part 3: Creating balanced tree from 
 #####
 
-
-
 def testBalancedCreate():
-	
+	testList = [3,2,1,4,6,5,7,81]
+	testTree = createBalancedTree(testList)
+	# Solution:
+	#		5
+	#	 3	   7
+	#  2  4   6  8
+	#1      	
+	assert testTree.left.left.left.getValue() == 1
+	assert testTree.right.left.getValue() == 6

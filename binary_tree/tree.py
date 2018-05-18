@@ -3,6 +3,11 @@ from collections import deque
 from random import randint
 import math
 
+######
+# Part 1: Tree Class 
+#####
+
+
 class binaryTree():
 	# Simple implementation of binary search tree, with insertion and search
 	def __init__(self,value):
@@ -33,7 +38,8 @@ class binaryTree():
 		# If newValue == current node's value, add as left child of current node
 		# NB! May result in non-BST if stream of values are in specific order.
 		# NB! Solution to above error: (i) use createdBalancedTree(array) or (ii) implement trees with on-the-fly rotation like splay trees etc.
-		if self.value < newValue:
+
+		if self.value < newValue: # If node value is less than added value, add on right child 
 			if self.right == None: # If right node is empty, create new node
 				self.right = binaryTree(newValue)
 			else:
@@ -85,10 +91,14 @@ class binaryTree():
 			path.append(self.value)
 			return self.left.searchTree(target,depth=newDepth,path=path)
 
+######
+# Part 2: Functions on Tree
+#####
+
 ### Check for insertion and search
 
 def checkTreeFixed(tree,target):
-	depth,path = tree.searchTree(target) # Search for 
+	depth,path = tree.searchTree(target)
 	return depth,path
 
 ### Check for balance
@@ -105,6 +115,7 @@ def treeHeight(tree):
 	else:
 		return 1 + max(treeHeight(tree.left),treeHeight(tree.right))
 
+# Helper 2
 def treeMinHeight(tree):
 	# Gets height of minimum branch
 	if tree.left is None and tree.right is None:
@@ -126,7 +137,10 @@ def checkBalance(tree):
 		return False
 
 
-### Create balanced tree from array
+######
+# Part 3: Creating Balanced Tree from Array (ie. Static BST)
+#####
+
 
 # Helper function, assumes array is sorted!
 def _createBalancedTree(array):
@@ -146,10 +160,3 @@ def createBalancedTree(array):
 
 
 
-testList = [3,2,1,4,6,5,1,1,1,1]
-testTree = createBalancedTree(testList)
-#print(testTree.getValue())
-#print(testTree.getLeftChild().getValue())
-#print(testTree.getRightChild().getValue())
-testTree.printDepthWise()
-print(checkBalance(testTree))
