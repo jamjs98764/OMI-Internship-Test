@@ -57,6 +57,8 @@ class binaryTree():
 	def searchTree(self,target,depth=1,path=None): 
 	# Assumes target is in tree, prints depth and path to target	
 	# "Depth" and "path" are records of recursion, passed here as args to avoid using global variables
+	# If target is in tree, returns depth and [tree path]
+	# If target is not in tree, returns 0 as depth and empty list as tree path
 		if path == None:
 			path = []
 		if self.value == target:
@@ -65,6 +67,7 @@ class binaryTree():
 		elif self.value < target:
 			if self.right == None:
 				print("Target not in Tree.")
+				return (0,[])
 			newDepth = depth + 1
 			path.append(self.value)
 			return self.right.searchTree(target,depth=newDepth,path=path) 
@@ -72,6 +75,7 @@ class binaryTree():
 		else:
 			if self.left == None:
 				print("Target not in Tree.")
+				return (0,[])
 			newDepth = depth + 1
 			path.append(self.value)
 			return self.left.searchTree(target,depth=newDepth,path=path)
@@ -153,4 +157,4 @@ print(treeMinHeight(myTree))
 
 testList = [3,2,1,4,5]
 testTree = createBalancedTree(testList)
-print(checkBalance(testTree))
+print(testTree.searchTree(6))
